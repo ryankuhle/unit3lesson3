@@ -35,7 +35,12 @@ data = []
 for row in table.findAll('tr')[8:191]:
     cols = row.findAll('td')
     cols = [ele.text.strip() for ele in cols]
-    data.append([ele for ele in cols if ele])
+    country = cols[0]
+    year = cols[1]
+    men = int(cols[7])
+    women = float(cols[10])
+    total = (men + women) / 2
+    print "%s, %s, %s, %s, %s" % (country, year, total, men, women)
+    #cols = [ele.text.strip() for ele in cols]
+    #data.append([ele for ele in cols if ele])
     #some items have 5 columns, some have 6. Need to eliminate unneeded column
-
-print data
