@@ -15,7 +15,6 @@ def create_tables():
     with con:
         cur.execute('CREATE TABLE life_expectancy (country TEXT, year INT, male    INT, female INT)')
         print "Created life_expectancy table successfully."
-        #cur = con.cursor()
         cur.execute('CREATE TABLE gdp (country TEXT, _1999 TEXT, _2000 TEXT, _2001 TEXT, _2002 TEXT, _2003 TEXT, _2004 TEXT, _2005 TEXT, _2006 TEXT, _2007 TEXT, _2008 TEXT, _2009 TEXT, _2010 TEXT)')
         print "Created gdp table successfully."
 
@@ -51,14 +50,14 @@ def get_gdp_data():
         next(inputFile)
         header = next(inputFile)
         inputReader = csv.reader(inputFile)
-        #cur = con.cursor()
+        cur = con.cursor()
         for line in inputReader:
-            print '"' + line[0] + '","' + '","'.join(line[42:-5]) + '"'
-        #    with con:
-        #        cur.execute('INSERT INTO gdp (country_name, _1999, _2000, _2001, _2002, _2003, _2004, _2005, _2006, _2007, _2008, _2009, _2010) VALUES ("' + line[0] + '","' + '","'.join(line[42:-5]) + '");')
+            info = (line[0], line[43], line[44], line[45], line[46], line[47], line[48], line[49], line[50], line[51], line[52], line[53], line[54])
+            with con:
+                cur.execute('INSERT INTO gdp (country, _1999, _2000, _2001, _2002, _2003, _2004, _2005, _2006, _2007, _2008, _2009, _2010) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);', info)
 
 
 #Run these functions ONCE upon initial setup
-create_tables()
+##create_tables()
 ##get_edu_data(url)
-#get_gdp_data()
+##get_gdp_data()
