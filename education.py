@@ -7,14 +7,17 @@ url = "http://web.archive.org/web/20110514112442/http://unstats.un.org/unsd/demo
 
 con = lite.connect('education.db')
 
-def create_table():
-    '''create_table
-    Create SQLite table to store education data in.
+def create_tables():
+    '''create_tables
+    Create SQLite tables to store education and GDP data in, respectively.
     '''
     cur = con.cursor()
     with con:
         cur.execute('CREATE TABLE life_expectancy (country TEXT, year INT, male    INT, female INT)')
-    print "Table creation successful."
+        print "Created life_expectancy table successfully."
+        #cur = con.cursor()
+        cur.execute('CREATE TABLE gdp (country TEXT, _1999 TEXT, _2000 TEXT, _2001 TEXT, _2002 TEXT, _2003 TEXT, _2004 TEXT, _2005 TEXT, _2006 TEXT, _2007 TEXT, _2008 TEXT, _2009 TEXT, _2010 TEXT)')
+        print "Created gdp table successfully."
 
 def get_edu_data(url):
     '''get_edu_data
@@ -56,9 +59,6 @@ def get_gdp_data():
 
 
 #Run these functions ONCE upon initial setup
-##create_table()
+create_tables()
 ##get_edu_data(url)
-get_gdp_data()
-
-# we are trying to compare school life expectancy against national GDP
-# need to figure out what columns I want from CSV: country name, all data from 1999 through 2010
+#get_gdp_data()
